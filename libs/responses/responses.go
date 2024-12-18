@@ -4,22 +4,22 @@ type Status struct {
 	Status string `json:"status"`
 }
 type Message struct {
-	Status
+	Status  string `json:"status"`
 	Message string `json:"message"`
 }
 
 type Data struct {
-	Status string
-	Data   any `json:"data"`
+	Status string `json:"status"`
+	Data   any    `json:"data"`
 }
 
 type MessageData struct {
-	Status
-	Message string
-	Data    any
+	Status  string `json:"status"`
+	Message string `json:"message"`
+	Data    any    `json:"data"`
 }
 
 type Error struct {
-	Status string
-	Errors any `json:"errors"`
+	Status string `json:"status"`
+	Errors any    `json:"errors"`
 }
