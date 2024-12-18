@@ -23,6 +23,14 @@ func NewUserService(db *gorm.DB) *UserService {
 	return &UserService{db: db}
 }
 
+// count user by email
+func (s *UserService) _countUser(email string) (int64, error) {
+	var count int64
+	err := s.db.Model(&User{}).Where("email = ?", email).Count(&count).Error
+
+	return count, err
+}
+
 // Register user service
 func (s *UserService) register(data *ReqRegister) (*ResRegister, *httpErr.HTTPError) {
 
@@ -74,7 +82,6 @@ func (s *UserService) register(data *ReqRegister) (*ResRegister, *httpErr.HTTPEr
 
 	if err := s.db.Create(user).Error; err != nil {
 		return nil, httpErr.NewHTTPError(500, []string{"database error", err.Error()}, err)
-
 	}
 
 	return &ResRegister{
@@ -83,10 +90,11 @@ func (s *UserService) register(data *ReqRegister) (*ResRegister, *httpErr.HTTPEr
 
 }
 
-// count user by email
-func (s *UserService) _countUser(email string) (int64, error) {
-	var count int64
-	err := s.db.Model(&User{}).Where("email = ?", email).Count(&count).Error
-
-	return count, err
+func (s *UserService) list(start int, take int) (*ResListUser, *httpErr.HTTPError) {
+	var listUser ResListUser
+	err := s.db.Model(&User{}).Offset(start).Limit(take).Select("uid", "first_name", "last_name", "is_staff", "is_admin", "is_expert").Find(&listUser).Error
+	if err != nil {
+		return nil, httpErr.NewHTTPError(500, []string{"database error", err.Error()}, err)
+	}
+	return &listUser, nil
 }

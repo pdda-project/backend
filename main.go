@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/pdda-project/backend/users"
@@ -21,10 +22,19 @@ func main() {
 	}
 
 	// db
-	db, err := gorm.Open(sqlite.Open(os.Getenv("DB_URI")))
+	db, err := gorm.Open(sqlite.Open(os.Getenv("DB_URI")), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	sqlDB, err := db.DB()
+	if err != nil {
+		log.Fatalf("Failed to get sql.DB: %v", err)
+	}
+	sqlDB.SetMaxIdleConns(10)
+	sqlDB.SetMaxOpenConns(100)
+	sqlDB.SetConnMaxIdleTime(5 * time.Minute)
+	sqlDB.SetConnMaxLifetime(30 * time.Minute)
 
 	// ============================== Router
 	// Initialize router

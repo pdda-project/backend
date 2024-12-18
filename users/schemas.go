@@ -1,7 +1,14 @@
 package users
 
 // ============================== Requests
-type UserSummary struct{}
+type UserSummary struct {
+	Uid       string `json:"uid"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	IsStaff   bool   `json:"isStaff"`
+	IsAdmin   bool   `json:"isAdmin"`
+	IsExpert  bool   `json:"isExpert"`
+}
 
 // ============================== Requests
 
