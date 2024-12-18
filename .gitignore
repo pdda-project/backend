@@ -1,11 +1,13 @@
 # Direktori/Files build
 /bin/
 /obj/
+/tmp/
 /*.exe
 /*.dll
 /*.so
 /*.dylib
 /*.test
+
 
 # File cache
 *.log
