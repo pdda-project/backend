@@ -51,3 +51,6 @@ Desktop.ini
 
 # Caches Go
 /go.sum
+
+
+db.sqlite3

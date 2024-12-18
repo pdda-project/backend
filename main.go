@@ -7,6 +7,9 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/pdda-project/backend/users"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 func main() {
@@ -17,11 +20,19 @@ func main() {
 		log.Fatal(err.Error())
 	}
 
+	// db
+	db, err := gorm.Open(sqlite.Open(os.Getenv("DB_URI")))
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	// ============================== Router
 	// Initialize router
 	r := http.NewServeMux()
 
 	// Routing
+	userHandler := users.NewUserHandler(db)
+	userHandler.RegisterRouter(r)
 
 	// ============================== Server
 	// Read server address from env

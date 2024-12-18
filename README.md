@@ -12,7 +12,6 @@
 ## Teknologi yang Digunakan
 
 - **Go**: Bahasa pemrograman utama untuk membangun backend.
-- **Gin Framework**: Framework web yang ringan dan cepat.
 - **GORM**: ORM untuk integrasi database.
 - **Swagger**: Dokumentasi API otomatis.
 
