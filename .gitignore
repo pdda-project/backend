@@ -1,0 +1,51 @@
+# Direktori/Files build
+/bin/
+/obj/
+/*.exe
+/*.dll
+/*.so
+/*.dylib
+/*.test
+
+# File cache
+*.log
+*.out
+*.tmp
+
+# Direktori Go Modules
+/vendor/
+
+# File Go build dan cache
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Direktori dan file spesifik OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Direktori dan file IDE/Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Files konfigurasi pribadi
+.env
+.env.local
+
+# Files debug atau temporary lainnya
+*.bak
+*.old
+*.swp
+*.tmp
+*.orig
+*.save
+
+# Caches Go
+/go.sum
