@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 
 	"github.com/pdda-project/backend/services/users/pb"
 	"github.com/pdda-project/backend/services/users/repo"
@@ -35,7 +36,12 @@ func (s *gRPCServer) RegisterUser(ctx context.Context, req *pb.RegisterUserReque
 
 	// Create and write to db
 	err := s.db.Create(&user).Error
-	return &pb.RegisterUserResponse{Success: (err != nil)}, err
+	if err != nil {
+		log.Println(err.Error())
+		return nil, err
+	}
+	return &pb.RegisterUserResponse{Uid: user.Uid}, nil
+
 }
 
 func (s *gRPCServer) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error) {

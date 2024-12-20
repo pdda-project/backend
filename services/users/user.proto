@@ -26,7 +26,7 @@ message RegisterUserRequest {
     string Password = 2;
 }
 message RegisterUserResponse {
-    bool Success = 1;
+    string Uid = 1;
 }
 
 message ListUserRequest {
@@ -60,7 +60,7 @@ message UpdateUserRequest {
     string Company = 7;
 }
 message UpdateUserResponse {
-    bool Success = 1;
+    string Uid = 1;
 }
 
 message ChangeUserPasswordRequest {
@@ -69,7 +69,7 @@ message ChangeUserPasswordRequest {
     string CurrentPassword = 3;
 }
 message ChangeUserPasswordResponse {
-    bool Success = 1;
+    string Uid = 1;
 }
 
 message ChangeUserEmailRequest {
@@ -77,12 +77,12 @@ message ChangeUserEmailRequest {
     string Email = 2;
 }
 message ChangeUserEmailResponse {
-    bool Success = 1;
+    string Uid = 1;
 }
 
 message DeleteUserRequest {
     string Uid = 1;
 }
 message DeleteUserResponse {
-    bool Success = 1;
+    string Uid = 1;
 }
