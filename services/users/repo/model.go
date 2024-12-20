@@ -1,24 +1,26 @@
 package repo
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
 type User struct {
-	Uid           string  `gorm:"column:uid;primaryKey"`
-	Email         string  `gorm:"column:email"`
-	PasswordHash  string  `gorm:"column:password_hash"`
-	DisplayName   string  `gorm:"column:display_name"`
-	IsAdmin       bool    `gorm:"column:is_admin;default:false"`
-	IsStaff       bool    `gorm:"column:is_staff;default:false"`
-	IsExpert      bool    `gorm:"column:is_expert;default:false"`
-	RoleAtCompany *string `gorm:"column:role_at_company"`
-	Company       *string `gorm:"column:company"`
-	CompanyEmail  *string `gorm:"column:company_email"`
-	CreatedAt     string  `gorm:"column:created_at"`
-	PhotoUrl      string  `gorm:"column:photo_url"`
+	Uid           string    `gorm:"column:uid;primaryKey"`
+	Email         string    `gorm:"column:email"`
+	PasswordHash  string    `gorm:"column:password_hash"`
+	DisplayName   string    `gorm:"column:display_name"`
+	IsAdmin       bool      `gorm:"column:is_admin;default:false"`
+	IsStaff       bool      `gorm:"column:is_staff;default:false"`
+	IsExpert      bool      `gorm:"column:is_expert;default:false"`
+	RoleAtCompany string    `gorm:"column:role_at_company"`
+	Company       string    `gorm:"column:company"`
+	CompanyEmail  string    `gorm:"column:company_email"`
+	CreatedAt     time.Time `gorm:"column:created_at"`
+	PhotoUrl      string    `gorm:"column:photo_url"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
