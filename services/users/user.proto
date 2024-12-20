@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+service UserService {
+    rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
+    rpc ListUser(ListUserRequest) returns (ListUserResponse);
+    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+    rpc ChangeUserEmail(ChangeUserEmailRequest) returns (ChangeUserEmailResponse);
+    rpc ChangeUserPassword(ChangeUserPasswordRequest) returns (ChangeUserPasswordResponse);
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
+}
+
+message User {
+    string Uid = 1;
+    string DisplayName = 2;
+    string IsAdmin = 3;
+    string IsStaff = 4;
+    string IsExpert = 5;
+    string PhotoUrl = 6;
+}
+
+message RegisterUserRequest {
+    string Email = 1;
+    string Password = 2;
+}
+message RegisterUserResponse {
+    bool Success = 1;
+}
+
+message ListUserRequest {
+    int64 Take = 1;
+    int64 Start = 2;
+}
+message ListUserResponse {
+    repeated User Users = 1;
+}
+
+message GetUserRequest {
+    string Uid = 1;
+}
+message GetUserResponse {
+    string Uid = 1;
+    string DisplayName = 2;
+    string IsAdmin = 3;
+    string IsStaff = 4;
+    string IsExpert = 5;
+    string RoleAtCompany = 6;
+    string Company = 7;
+    string CompanyEmail = 8;
+    string CreatedAt = 9;
+    string PhotoUrl = 10;
+}
+
+message UpdateUserRequest {
+    string Uid = 1;
+    string DisplayName = 2;
+    string RoleAtCompany = 6;
+    string Company = 7;
+}
+message UpdateUserResponse {
+    bool Success = 1;
+}
+
+message ChangeUserPasswordRequest {
+    string Uid = 1;
+    string NewPassword = 2;
+    string CurrentPassword = 3;
+}
+message ChangeUserPasswordResponse {
+    bool Success = 1;
+}
+
+message ChangeUserEmailRequest {
+    string Uid = 1;
+    string Email = 2;
+}
+message ChangeUserEmailResponse {
+    bool Success = 1;
+}
+
+message DeleteUserRequest {
+    string Uid = 1;
+}
+message DeleteUserResponse {
+    bool Success = 1;
+}
