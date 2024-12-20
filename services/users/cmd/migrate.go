@@ -5,31 +5,22 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	"github.com/pdda-project/backend/services/users/repo"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
 func main() {
-	// Load dotenv
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	// Dotenv configs
-	host := os.Getenv("USER_SERVICE_HOST")
 	dbUri := os.Getenv("DB_URI")
-
-	// Create database
 	db, err := gorm.Open(sqlite.Open(dbUri))
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal(err)
 	}
 
-	// Create server
-	server, err := NewGRPCServer(host, db)
-	if err != nil {
-		log.Fatal(err.Error())
-	}
-	server.Run()
+	db.AutoMigrate(&repo.User{})
 }

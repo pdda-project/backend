@@ -15,9 +15,9 @@ service UserService {
 message User {
     string Uid = 1;
     string DisplayName = 2;
-    string IsAdmin = 3;
-    string IsStaff = 4;
-    string IsExpert = 5;
+    bool IsAdmin = 3;
+    bool IsStaff = 4;
+    bool IsExpert = 5;
     string PhotoUrl = 6;
 }
 
@@ -43,9 +43,9 @@ message GetUserRequest {
 message GetUserResponse {
     string Uid = 1;
     string DisplayName = 2;
-    string IsAdmin = 3;
-    string IsStaff = 4;
-    string IsExpert = 5;
+    bool IsAdmin = 3;
+    bool IsStaff = 4;
+    bool IsExpert = 5;
     string RoleAtCompany = 6;
     string Company = 7;
     string CompanyEmail = 8;

@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/pdda-project/backend/services/users/pb"
+	"github.com/pdda-project/backend/services/users/repo"
 )
 
 func (s *gRPCServer) ChangeUserEmail(ctx context.Context, req *pb.ChangeUserEmailRequest) (*pb.ChangeUserEmailResponse, error) {
@@ -27,7 +28,14 @@ func (s *gRPCServer) ListUser(ctx context.Context, req *pb.ListUserRequest) (*pb
 }
 
 func (s *gRPCServer) RegisterUser(ctx context.Context, req *pb.RegisterUserRequest) (*pb.RegisterUserResponse, error) {
-	panic("unimplemented")
+	// Creating model
+	var user repo.User
+	user.Email = req.Email
+	user.PasswordHash = req.Password
+
+	// Create and write to db
+	err := s.db.Create(&user).Error
+	return &pb.RegisterUserResponse{Success: (err != nil)}, err
 }
 
 func (s *gRPCServer) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error) {
