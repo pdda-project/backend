@@ -24,6 +24,7 @@ message User {
 message RegisterUserRequest {
     string Email = 1;
     string Password = 2;
+    string DisplayName = 3;
 }
 message RegisterUserResponse {
     string Uid = 1;

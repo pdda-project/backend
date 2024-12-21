@@ -36,18 +36,19 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	// req := usersPb.RegisterUserRequest{
-	// 	Email:    "qodar@gmail.co.id",
-	// 	Password: "secretpassword",
-	// }
-	// resp, err := client.RegisterUser(ctx, &req)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// fmt.Println(resp.GetUid())
+	req := usersPb.RegisterUserRequest{
+		Email:       "qodar@gmail.co.id",
+		Password:    "secretpassword",
+		DisplayName: "Nurfian Qodar",
+	}
+	resp, err := client.RegisterUser(ctx, &req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(resp.GetUid())
 
 	req2 := &usersPb.GetUserRequest{
-		Uid: "0193e55f-202c-7281-ae02-37c6d0d26bdc",
+		Uid: resp.Uid,
 	}
 	resp2, err := client.GetUser(ctx, req2)
 	if err != nil {

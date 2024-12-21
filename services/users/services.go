@@ -92,6 +92,10 @@ func (s *gRPCServer) RegisterUser(
 		log.Println(err.Error())
 		return nil, errors.NewHTTPError(400, "password minimum length is 8 characters")
 	}
+	if err := v(req.DisplayName, "required"); err != nil {
+		log.Println(err.Error())
+		return nil, errors.NewHTTPError(400, "name is required")
+	}
 
 	// Get count email
 	countUser, err := utils.CountRecord(s.db, &repo.User{}, "email", req.Email)
@@ -108,6 +112,7 @@ func (s *gRPCServer) RegisterUser(
 	var user repo.User
 	user.Email = req.Email
 	user.PasswordHash = req.Password
+	user.DisplayName = req.DisplayName
 
 	// Create and write to db
 	err = s.db.Create(&user).Error
