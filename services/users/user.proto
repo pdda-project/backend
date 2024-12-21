@@ -50,8 +50,9 @@ message GetUserResponse {
     string RoleAtCompany = 6;
     string Company = 7;
     string CompanyEmail = 8;
-    string CreatedAt = 9;
-    string PhotoUrl = 10;
+    string PhotoUrl = 9;
+    int64 CreatedAt = 10;
+    int64 UpdatedAt = 11;
 }
 
 message UpdateUserRequest {

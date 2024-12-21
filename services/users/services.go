@@ -61,8 +61,9 @@ func (s *gRPCServer) GetUser(
 		RoleAtCompany: user.RoleAtCompany,
 		Company:       user.Company,
 		CompanyEmail:  user.CompanyEmail,
-		CreatedAt:     user.CreatedAt.String(),
 		PhotoUrl:      user.PhotoUrl,
+		CreatedAt:     int64(user.CreatedAt),
+		UpdatedAt:     int64(user.UpdatedAt),
 	}, nil
 
 }
